@@ -60,6 +60,14 @@ public class DroneFactory : MonoBehaviour
             _unitWorkers[i].Run();
         }
     }
+
+    void OnApplicationQuit()
+    {
+        foreach (var w in _unitWorkers)
+        {
+            w.Abort();
+        }
+    }
     #endregion MonoBehaviour
 
     /// <summary>
