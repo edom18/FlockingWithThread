@@ -68,10 +68,24 @@ public class DroneFactory : MonoBehaviour
     void GiveUnits()
     {
         int len = _unitWorkers.Length;
-        int range = _units.Count / len;
-        for (int i = 0; i < _unitWorkers.Length; i++)
+
+        if (_units.Count < len)
         {
-            List<UnitBase> units = _units.GetRange(range * i, range);
+            _unitWorkers[0].Units = _units;
+            return;
+        }
+
+        int range = Mathf.RoundToInt((float)_units.Count / len);
+        int remnant = _units.Count % range;
+        for (int i = 0; i < len; i++)
+        {
+            int index = range * i;
+            int count = range;
+            if (i == len - 1)
+            {
+                count = _units.Count - index;
+            }
+            List<Flock> units = _units.GetRange(index, count);
             _unitWorkers[i].Units = units;
         }
     }
