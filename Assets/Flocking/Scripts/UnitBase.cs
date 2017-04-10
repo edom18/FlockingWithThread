@@ -70,6 +70,7 @@ public class UnitBase : MonoBehaviour
     private List<UnitBase> _neighbors = new List<UnitBase>();
 
     private readonly Vector3 _zeroCheck = Vector3.zero;
+    private readonly Vector3 _ep = new Vector3(0.0001f, 0.0001f, 0.0001f);
     #endregion Variables
 
     void Start()
@@ -162,6 +163,10 @@ public class UnitBase : MonoBehaviour
             // 2.
             // 分離行動のために離れる距離を計算する
             delta = CachedPos - uPos;
+            if (delta == _zeroCheck)
+            {
+                delta = _ep;
+            }
             separate += delta.normalized / delta.magnitude;
         }
         center /= _neighbors.Count;
