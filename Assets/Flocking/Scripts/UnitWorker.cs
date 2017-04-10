@@ -19,6 +19,9 @@ public class UnitWorker
         Initialize();
     }
 
+    /// <summary>
+    /// 初期化
+    /// </summary>
 	void Initialize()
     {
         _thread = new Thread(ThreadRun);
@@ -26,6 +29,9 @@ public class UnitWorker
         _thread.Start();
 	}
 
+    /// <summary>
+    /// 計算スレッドを開始
+    /// </summary>
     public void Run()
     {
         _timeStep = Time.deltaTime;
@@ -33,6 +39,17 @@ public class UnitWorker
         _mre.Set();
     }
 
+    /// <summary>
+    /// スレッドを終了
+    /// </summary>
+    public void Abort()
+    {
+        _thread.Abort();
+    }
+
+    /// <summary>
+    /// ユニットの位置を計算
+    /// </summary>
     void Calculate()
     {
         UnitBase unit;
@@ -43,6 +60,9 @@ public class UnitWorker
         }
     }
 
+    /// <summary>
+    /// スレッドを実行
+    /// </summary>
     void ThreadRun()
     {
         _mre.WaitOne();
