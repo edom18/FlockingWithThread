@@ -85,7 +85,7 @@ public class DroneFactory : MonoBehaviour
             {
                 count = _units.Count - index;
             }
-            List<Flock> units = _units.GetRange(index, count);
+            List<UnitBase> units = _units.GetRange(index, count);
             _unitWorkers[i].Units = units;
         }
     }
